@@ -2,162 +2,22 @@
 <app-tags></app-tags>
 <app-not-found></app-not-found>
 
-<ul>
-    <li>
-        <a href="">
-            <img src="../../../../assets/food-1.jpg" alt="img">
+<ul >
+    <li *ngFor="let food of foods">
+        <a [routerLink]="['/food',food.id]">
+            <img [src]="food.imageUrl" [alt]="food.name">
             <div class="content">
-                <div class="name">Pizza</div>
-                <span class="favorite">❤</span>
+                <div class="name">{{food.name}}</div>
+                <span class="favorite {{food.favorite ? '' : 'not'}}">❤</span>
                 <div class="product-item-corner">
                     <div class="origins">
-                        <span>Italic</span><span>China</span>
+                        <span *ngFor="let origin of food.origins">{{origin}}</span>
                     </div>
                     <div class="cook-time">
                         <span>⏲</span>
-                        10m
+                        {{food.cookTime}}
                     </div>
-                    <div class="price">10$</div>
-                </div>
-            </div>
-        </a>
-    </li>
-
-    <li>
-        <a href="">
-            <img src="../../../../assets/food-1.jpg" alt="img">
-            <div class="content">
-                <div class="name">Pizza</div>
-                <span class="favorite">❤</span>
-                <div class="product-item-corner">
-                    <div class="origins">
-                        <span>Italic</span><span>China</span>
-                    </div>
-                    <div class="cook-time">
-                        <span>⏲</span>
-                        10m
-                    </div>
-                    <div class="price">10$</div>
-                </div>
-            </div>
-        </a>
-    </li>
-    
-    <li>
-        <a href="">
-            <img src="../../../../assets/food-1.jpg" alt="img">
-            <div class="content">
-                <div class="name">Pizza</div>
-                <span class="favorite">❤</span>
-                <div class="product-item-corner">
-                    <div class="origins">
-                        <span>Italic</span><span>China</span>
-                    </div>
-                    <div class="cook-time">
-                        <span>⏲</span>
-                        10m
-                    </div>
-                    <div class="price">10$</div>
-                </div>
-            </div>
-        </a>
-    </li>
-    
-    <li>
-        <a href="">
-            <img src="../../../../assets/food-1.jpg" alt="img">
-            <div class="content">
-                <div class="name">Pizza</div>
-                <span class="favorite">❤</span>
-                <div class="product-item-corner">
-                    <div class="origins">
-                        <span>Italic</span><span>China</span>
-                    </div>
-                    <div class="cook-time">
-                        <span>⏲</span>
-                        10m
-                    </div>
-                    <div class="price">10$</div>
-                </div>
-            </div>
-        </a>
-    </li>
-
-    <li>
-        <a href="">
-            <img src="../../../../assets/food-1.jpg" alt="img">
-            <div class="content">
-                <div class="name">Pizza</div>
-                <span class="favorite">❤</span>
-                <div class="product-item-corner">
-                    <div class="origins">
-                        <span>Italic</span><span>China</span>
-                    </div>
-                    <div class="cook-time">
-                        <span>⏲</span>
-                        10m
-                    </div>
-                    <div class="price">10$</div>
-                </div>
-            </div>
-        </a>
-    </li>
-    
-    <li>
-        <a href="">
-            <img src="../../../../assets/food-1.jpg" alt="img">
-            <div class="content">
-                <div class="name">Pizza</div>
-                <span class="favorite">❤</span>
-                <div class="product-item-corner">
-                    <div class="origins">
-                        <span>Italic</span><span>China</span>
-                    </div>
-                    <div class="cook-time">
-                        <span>⏲</span>
-                        10m
-                    </div>
-                    <div class="price">10$</div>
-                </div>
-            </div>
-        </a>
-    </li>
-
-    <li>
-        <a href="">
-            <img src="../../../../assets/food-1.jpg" alt="img">
-            <div class="content">
-                <div class="name">Pizza</div>
-                <span class="favorite">❤</span>
-                <div class="product-item-corner">
-                    <div class="origins">
-                        <span>Italic</span><span>China</span>
-                    </div>
-                    <div class="cook-time">
-                        <span>⏲</span>
-                        10m
-                    </div>
-                    <div class="price">10$</div>
-                </div>
-            </div>
-        </a>
-    </li>
-
-    <li>
-        <a href="">
-            <img src="../../../../assets/food-1.jpg" alt="img">
-            <div class="content">
-                <div class="name">Pizza</div>
-                <span class="favorite">❤</span>
-                <div class="product-item-corner">
-                    <div class="origins">
-                        <span>Italic</span><span>China</span>
-                    </div>
-                    <div class="cook-time">
-                        <span>⏲</span>
-                        10m
-                    </div>
-                    <div class="price">10$</div>
+                    <div class="price">{{food.price | currency}}</div>
                 </div>
             </div>
         </a>

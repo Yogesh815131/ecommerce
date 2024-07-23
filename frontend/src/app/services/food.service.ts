@@ -18,8 +18,9 @@ export class FoodService {
   }
 
   //To retrieve only user searched foods in the mongodb database
-  getAllFoodsBySearchTerm():Observable<Food[]>{
-    return this.http.get<Food[]>(FOODS_BY_SEARCH_URL);
+  getAllFoodsBySearchTerm(searchterm:String):Observable<Food[]>{
+    console.log("foodService", searchterm);    
+    return this.http.get<Food[]>(FOODS_BY_SEARCH_URL+searchterm);
   }
 
   //To retrieve all individual tags with their count

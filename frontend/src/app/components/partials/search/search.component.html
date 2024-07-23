@@ -1,4 +1,4 @@
 <div>
-    <input type="text" placeholder="search food...">
-    <button>Search</button>
+    <input type="text" placeholder="search food..." #searchtxbox (keyup.enter)="search(searchtxbox.value)">
+    <button (click)="search(searchtxbox.value)">Search</button>
 </div>
