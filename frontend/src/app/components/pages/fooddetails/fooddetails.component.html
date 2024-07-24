@@ -1,1 +1,24 @@
-<p>fooddetails works!</p>
+<div *ngIf="food" class="container">
+    <img [src]="food.imageUrl" [alt]="food.name">
+    <div class="header">
+        <span class="name">{{food.name}}</span>
+        <span class="favorite {{food.favorite ? '' : 'not'}}">❤</span>
+    </div>
+
+    <div class="origins">
+        <span *ngFor="let origin of food.origins">{{origin}}</span> 
+    </div>
+
+    <div class="tags">
+        <a routerLink="/tag/{{tag}}" *ngFor="let tag of food.tags">{{tag}}</a>
+    </div>
+
+    <div class="cook-time">
+        <span>Time to cook about <strong>{{food.cookTime}}  mins</strong> </span>
+    </div>
+
+    <div class="price">
+        <span>{{food.price}}</span>
+    </div>
+    <button>Add to Card</button>
+</div>
