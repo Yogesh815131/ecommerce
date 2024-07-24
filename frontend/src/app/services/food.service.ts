@@ -19,7 +19,6 @@ export class FoodService {
 
   //To retrieve only user searched foods in the mongodb database
   getAllFoodsBySearchTerm(searchterm:String):Observable<Food[]>{
-    console.log("foodService", searchterm);    
     return this.http.get<Food[]>(FOODS_BY_SEARCH_URL+searchterm);
   }
 

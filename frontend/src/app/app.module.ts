@@ -9,6 +9,7 @@ import { SearchComponent } from './components/partials/search/search.component';
 import { TagsComponent } from './components/partials/tags/tags.component';
 import { NotFoundComponent } from './components/partials/not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FooddetailsComponent } from './components/pages/fooddetails/fooddetails.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     SearchComponent,
     TagsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FooddetailsComponent
   ],
   imports: [
     BrowserModule,

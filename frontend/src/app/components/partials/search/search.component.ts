@@ -11,11 +11,11 @@ export class SearchComponent {
   searchterm:string='';
 
   constructor(private activatedRoute:ActivatedRoute, private router:Router){
-    this.activatedRoute.params.subscribe((params)=>{
-      if(params['searchterm']){
-        this.searchterm=params['searchterm'];
-      }
-    })
+    // this.activatedRoute.params.subscribe((params)=>{
+    //   if(params['searchterm']){
+    //     this.searchterm=params['searchterm'];
+    //   }
+    // })
   }
 
   search(searchdata:string){
