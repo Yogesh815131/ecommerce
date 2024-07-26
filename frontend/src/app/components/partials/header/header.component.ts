@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
 
   cartQuantity=0;
+
+  constructor(private cartApi:CartService){
+    this.cartApi.getCartObservable().subscribe((info)=>{
+      this.cartQuantity = info.totalCount;
+    })
+  }
 
 }
