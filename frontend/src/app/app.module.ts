@@ -12,6 +12,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FooddetailsComponent } from './components/pages/fooddetails/fooddetails.component';
 import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
 import { TitleComponent } from './components/partials/title/title.component';
+import { LoginPageComponent } from './components/pages/login-page/login-page.component';
+import { RegisterPageComponent } from './components/pages/register-page/register-page.component';
+import { TextInputeComponent } from './components/partials/text-inpute/text-inpute.component';
+import { InputContainerComponent } from './components/partials/input-container/input-container.component';
+import { DefaultButtonComponent } from './components/partials/default-button/default-button.component';
+import { InputValidationComponent } from './components/partials/input-validation/input-validation.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,13 @@ import { TitleComponent } from './components/partials/title/title.component';
     NotFoundComponent,
     FooddetailsComponent,
     CartPageComponent,
-    TitleComponent
+    TitleComponent,
+    LoginPageComponent,
+    RegisterPageComponent,
+    TextInputeComponent,
+    InputContainerComponent,
+    DefaultButtonComponent,
+    InputValidationComponent
   ],
   imports: [
     BrowserModule,
