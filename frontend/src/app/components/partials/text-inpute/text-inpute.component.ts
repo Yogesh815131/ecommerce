@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'text-inpute',
+  selector: 'text-input',
   templateUrl: './text-inpute.component.html',
   styleUrl: './text-inpute.component.css'
 })
@@ -14,7 +14,7 @@ export class TextInputeComponent implements OnInit{
   @Input()type: 'text' | 'password' | 'email' = 'text';
 
   constructor(){}
-  ngOnInit(): void {      
+  ngOnInit() {      
   }
 
   get formControl(){
