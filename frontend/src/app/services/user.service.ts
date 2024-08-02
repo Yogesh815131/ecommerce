@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../shared/models/User';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
-import { USER_REGISTER_URL } from '../shared/constants/urls';
+import { USER_LOGIN_URL, USER_REGISTER_URL } from '../shared/constants/urls';
+import { IUserLogin } from '../shared/interfaces/IUserLogin';
+import { ToastrService } from 'ngx-toastr';
 
 
 const USER_KEY = 'User';
@@ -16,7 +18,7 @@ export class UserService {
   private userSubject = new BehaviorSubject<User>(this.getUserFormLocalStorage());
   public userObservable!:Observable<User>;
 
-  constructor(private http:HttpClient, ) { 
+  constructor(private http:HttpClient, private toastrService:ToastrService) { 
     this.userObservable = this.userSubject.asObservable();
   }
 
@@ -26,10 +28,10 @@ export class UserService {
         next:(user)=>{
           this.setUserToLocalStorage(user);
           this.userSubject.next(user);
-          //toster message
+          this.toastrService.success(`Welcome to My Food App ${user.name}`, "You have Registered Successfully");
         },
         error: (errorMessage)=>{
-          console.log(errorMessage.error);          
+          this.toastrService.error(errorMessage.error, "Registration Failed")          
         }
       })
     )
@@ -48,5 +50,28 @@ export class UserService {
     return this.userSubject.value;
   }
 
+  login(userLoginData:IUserLogin):Observable<User>{
+    return this.http.post<User>(USER_LOGIN_URL, userLoginData).pipe(
+      tap({
+        next:(user) =>{
+          this.setUserToLocalStorage(user);
+          this.userSubject.next(user);
+          this.toastrService.success(
+            `Welcome to My Food App ${user.name}`,
+            'Login Successfull'
+          )
+        },
+        error: (errorResponse) =>{
+          this.toastrService.error(errorResponse.error, 'Login Failed');
+        }
+      })
+    )
+  }
+
+  logout(){
+    this.userSubject.next(new User());
+    localStorage.removeItem(USER_KEY);
+    window.location.reload();
+  }
   
 }
