@@ -8,7 +8,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { SearchComponent } from './components/partials/search/search.component';
 import { TagsComponent } from './components/partials/tags/tags.component';
 import { NotFoundComponent } from './components/partials/not-found/not-found.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { FooddetailsComponent } from './components/pages/fooddetails/fooddetails.component';
 import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
 import { TitleComponent } from './components/partials/title/title.component';
@@ -21,6 +21,8 @@ import { InputValidationComponent } from './components/partials/input-validation
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { authInterceptor } from './auth/auth.interceptor';
+import { CheckoutPageComponent } from './components/pages/checkout-page/checkout-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     TextInputeComponent,
     InputContainerComponent,
     DefaultButtonComponent,
-    InputValidationComponent
+    InputValidationComponent,
+    CheckoutPageComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     }),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(withInterceptors([authInterceptor])), //---> function base interceptor
+    //provideHttpClient(withInterceptors([authInterceptor])) ---> class base use
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
