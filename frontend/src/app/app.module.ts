@@ -23,6 +23,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { authInterceptor } from './auth/auth.interceptor';
 import { CheckoutPageComponent } from './components/pages/checkout-page/checkout-page.component';
+import { OrderItemsListComponent } from './components/partials/order-items-list/order-items-list.component';
+import { MapComponent } from './components/partials/map/map.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { CheckoutPageComponent } from './components/pages/checkout-page/checkout
     InputContainerComponent,
     DefaultButtonComponent,
     InputValidationComponent,
-    CheckoutPageComponent
+    CheckoutPageComponent,
+    OrderItemsListComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
