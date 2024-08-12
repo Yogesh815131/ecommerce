@@ -3,13 +3,13 @@
         <a href="" class="logo">Yogesh Food Place</a>
         <nav>
             <ul>
-                <li>
+                <li *ngIf="!isAuth">
                     <a routerLink="/login">Login</a>
                 </li>
-                <li class="menu-container">
-                    <a href="">Yogesh</a>
+                <li *ngIf="isAuth" class="menu-container">
+                    <a href="">{{name}}</a>
                     <div class="menu">
-                        <a href="">Logout</a>
+                        <a (click)="logout()">Logout</a>
                     </div>
                 </li>
                 <li>

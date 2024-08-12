@@ -1,41 +1,43 @@
-import { Router } from "express";
-import auth from '../middleware/auth.mid';
+import {Router} from "express";
 import asyncHandler from 'express-async-handler';
-import { HTTP_BAD_REQUEST, HTTP_UNAUTHORIZED } from "../constants/http_status";
-import { OrderModel } from "../models/order.model";
-import { OrderStatus } from "../constants/order_status";
+import { HTTP_BAD_REQUEST } from '../constants/http_status';
+import { OrderStatus } from '../constants/order_status';
+import { OrderModel } from '../models/order.model';
+import auth from '../middleware/auth.mid';
+import { log } from "console";
 
 const router = Router();
 router.use(auth);
 
-router.post("/create", asyncHandler(async(req:any, res:any)=>{
-    const requestOrder = req.body;
-
-    if(requestOrder.items.length <= 0){
-        res.status(HTTP_UNAUTHORIZED).send('Cart Is Empty!');
+router.post("/create",asyncHandler(async(req:any,res:any)=>{
+const requestOrder = req.body;
+console.log(requestOrder);
+if(requestOrder.items.length <= 0){
+        res.status(HTTP_BAD_REQUEST).send('Cart Is Empty!');
+        console.log('Cart Is Empty!');        
         return;
     }
 
-    await OrderModel.deleteOne({
+await OrderModel.deleteOne({
         user: req.user.id,
         status: OrderStatus.NEW
     })
-
-    const newOrder = new OrderModel({...requestOrder, user: req.user.id});
-    await newOrder.save();
+	
+const newOrder = new OrderModel({...requestOrder,user: req.user.id});
+await newOrder.save();
+console.log(newOrder);
     res.send(newOrder);
 }));
 
-router.get('/newOrderForCurrentUser', asyncHandler(async(req:any, res:any)=>{
-    const order = await getNewOrderFprCurrentUser(req);
+router.get('/newOrderForCurrentUser', asyncHandler( async (req:any,res ) => {
+    const order= await getNewOrderForCurrentUser(req);
     if(order) res.send(order);
     else res.status(HTTP_BAD_REQUEST).send();
 }));
 
-
-router.post('/pay', asyncHandler(async(req:any, res:any)=>{
+router.post('/pay', asyncHandler( async (req:any, res) => {
     const {paymentId} = req.body;
-    const order = await getNewOrderFprCurrentUser(req);
+    const order = await getNewOrderForCurrentUser(req);
     if(!order){
         res.status(HTTP_BAD_REQUEST).send('Order Not Found!');
         return;
@@ -46,17 +48,14 @@ router.post('/pay', asyncHandler(async(req:any, res:any)=>{
     await order.save();
 
     res.send(order._id);
-}));
+}))
 
-
-router.get('/track/:id', asyncHandler(async(req, res)=>{
+router.get('/track/:id', asyncHandler( async (req, res) => {
     const order = await OrderModel.findById(req.params.id);
     res.send(order);
 }))
 
-
-async function getNewOrderFprCurrentUser(req: any) {
-    return await OrderModel.findOne({user: req.user.id, status: OrderStatus.NEW});
+async function getNewOrderForCurrentUser(req: any) {
+    return await OrderModel.findOne({ user: req.user.id, status: OrderStatus.NEW });
 }
-
 export default router;
